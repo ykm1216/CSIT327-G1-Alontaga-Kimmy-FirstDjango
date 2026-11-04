@@ -20,7 +20,7 @@ class AdminPanelView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     template_name = "dashboard/admin_panel.html"
  
     def test_func(self):
-        user = self.request.user //
+        user = self.request.user 
         return self.request.user.role == CustomUser.Role.ADMIN
  
     def get_context_data(self, **kwargs):

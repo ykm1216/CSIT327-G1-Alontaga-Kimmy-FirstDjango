@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-7w@fetwws8r(myg^z7^yluyw)(^xv+#w2n-&wllk9(l!%h6%(_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testserver']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -128,3 +128,5 @@ MAILERS = {
     },
 }
 AUTH_USER_MODEL = 'accounts.CustomUser'
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = 'login'
