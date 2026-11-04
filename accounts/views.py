@@ -1,8 +1,10 @@
+from django.contrib import messages
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.views import LoginView
-from django.views.generic import CreateView
-from .forms import CustomUserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView, UpdateView
+from .forms import CustomUserCreationForm, ProfileForm
 
 
 def home(request):
@@ -20,3 +22,20 @@ class SignUpView(CreateView):
     form_class = CustomUserCreationForm
     template_name = "registration/signup.html"
     success_url = reverse_lazy("login")
+
+    def form_valid(self, form):
+        messages.success(self.request, "Your account was created. Please log in.")
+        return super().form_valid(form)
+
+
+class ProfileView(LoginRequiredMixin, UpdateView):
+    form_class = ProfileForm
+    template_name = "accounts/profile.html"
+    success_url = reverse_lazy("profile")
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def form_valid(self, form):
+        messages.success(self.request, "Your profile has been updated.")
+        return super().form_valid(form)
