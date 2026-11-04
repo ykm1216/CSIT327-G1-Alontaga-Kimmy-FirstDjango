@@ -2,9 +2,9 @@
  
 {% block content %}
 <h1>Dashboard</h1>
-<p>Welcome, {{ user.username }}.</p>
-<p>CampusConnect members: {{ member_count }}</p>
+<p class="muted">Welcome back, {{ user.first_name|default:user.username }}.</p>
+<p>CampusConnect members: <strong>{{ member_count }}</strong></p>
 {% if is_admin %}
-    <p><a href="{% url 'admin_panel' %}">Open admin panel</a></p>
+    <p><a class="button" href="{% url 'admin_panel' %}">Open admin panel</a></p>
 {% endif %}
 {% endblock %}
